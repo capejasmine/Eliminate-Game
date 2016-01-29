@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="6" height="6" tilewidth="90" tileheight="90" nextobjectid="1">
+ <tileset firstgid="1" name="tiled" tilewidth="90" tileheight="90" tilecount="1" columns="1">
+  <image source="tiled.png" width="90" height="90"/>
+ </tileset>
+ <layer name="3" width="6" height="6">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYCQBwwA6H5c4KWaDMAAIqAAd
+  </data>
+ </layer>
+</map>

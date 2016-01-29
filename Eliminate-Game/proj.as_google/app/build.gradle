@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.eliminategame.com"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 10
+        versionName "1.0"
+        multiDexEnabled true
+        android.enforceUniquePackageName=false
+    }
+
+    sourceSets.main {
+        java.srcDir "src"
+        res.srcDir "res"
+        jniLibs.srcDir "libs"
+        manifest.srcFile "AndroidManifest.xml"
+        assets.srcDir "assets"
+    }
+
+    signingConfigs {
+
+       release {
+            if (project.hasProperty("RELEASE_STORE_FILE")) {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (project.hasProperty("RELEASE_STORE_FILE")) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+//    task nativeLibsToJar(type: Zip, description: 'create a jar archive of the native libs') {
+//        destinationDir file("libs")
+//        baseName 'armeabi'
+//        extension 'jar'
+//        from fileTree(dir: 'libs', include: '**/*.so')
+//        into 'lib/'
+//    }
+//
+//    tasks.withType(JavaCompile) {
+//        compileTask -> compileTask.dependsOn(nativeLibsToJar)
+//    }
+    
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'  //this way we can find the .aar file in libs folder
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //解决Android 64k问题所必须的包
+    compile 'com.android.support:multidex:1.0.0'
+    //特别注意：下面的公共库默认全部屏蔽，Android端具体需要添加哪些公共库以最新的
+    //公共库关联脚本文档为准：ssh://git@stash.stm.com:7999/cmt/gitsubmodule.git 【android-studio-xxx分支】
+    //请特别注意三方库的几种关联方式：
+    //1.由公司提供的jar包，从stash上检在libs目录下后，可以在Module Setting->dependencies里直接添加file dependency,找到对应目录的jar包进行添加；
+    //2.由公司提供的aar包，从stash上检在libs目录下后，按屏蔽的代码格式添加aar包；
+    //3.由中央仓库提供的三方包，原则上应该在Module Setting->dependencies里选libaray dependency,然后选择对应包，但是由于此种情况下选择的包和
+    //当前项目的buildTool版本相关，实际在使用过程中我们需要到的包版本可能不一样,
+    //所以进行手动写代码添加.如下方屏蔽代码的最后一排添加googleServices包的脚本代码
+    //对于第三种包，具体应该使用哪个版本，用哪种方式添加，以公共库关联脚本文档为准！
+
+    //compile fileTree(dir: 'libs/lib_coco2dx', include: ['*.jar'])
+    //compile(name: 'lib_appcompat/lib_appcompat_v22.2', ext: 'aar')
+    //compile(name: 'lib_ads_production-DFP/fyber_adcolony_2.2.2_r2', ext: 'aar')
+    //compile(name: 'lib_ads_production-DFP/production_dfp_v1.0.0', ext: 'aar')
+    //compile(name: 'lib_component/component_v2.2.6', ext: 'aar')
+    //compile 'com.google.android.gms:play-services:8.1.0'
+}

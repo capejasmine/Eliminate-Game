@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.eliminategame.com"
+      android:versionCode="10"
+      android:versionName="1.0"
+      android:installLocation="auto">
+
+    <uses-sdk android:minSdkVersion="9"/>
+    <uses-feature android:glEsVersion="0x00020000" />
+    <supports-screens android:anyDensity="true"
+                      android:smallScreens="true"
+                      android:normalScreens="true"
+                      android:largeScreens="true"
+                      android:xlargeScreens="true"/>
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+   <uses-permission android:name="android.permission.WAKE_LOCK" />
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+   <uses-permission android:name="android.permission.GET_TASKS" />
+   <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.GET_TASKS" />
+   <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <!-- IAP for GP only -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <application android:label="@string/app_name"
+                 android:icon="@drawable/icon">
+					 
+        <!-- Tell Cocos2dxActivity the name of our .so -->
+        <meta-data android:name="android.app.lib_name"
+	              android:value="cocos2dcpp" />
+
+        <activity android:name=".AppActivity"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:configChanges="orientation|keyboardHidden|screenSize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- More game -->
+        <activity
+            android:name="com.common.android.jni.MoreGamesActivityForJNI"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+
+<!--********************************Ads begin********************************-->
+        
+       <!-- Inmobi Ads Declare begin -->
+		<service
+			android:name="com.inmobi.commons.internal.ActivityRecognitionManager"
+			android:enabled="true" />
+		<receiver
+			android:name="com.inmobi.commons.analytics.androidsdk.IMAdTrackerReceiver"
+			android:enabled="true"
+			android:exported="true" >
+			<intent-filter>
+				<action android:name="com.android.vending.INSTALL_REFERRER" />
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+				<action android:name="com.inmobi.share.id" />
+			</intent-filter>
+		</receiver>
+		
+		<activity
+			android:name="com.inmobi.androidsdk.IMBrowserActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|smallestScreenSize|screenSize" 
+			android:hardwareAccelerated="true" />
+		<!-- Inmobi Ads Declare end -->
+		
+		
+		<!-- Mopub Ads Declare begin-->
+        <activity
+            android:name="com.mopub.mobileads.MoPubActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="com.mopub.mobileads.MraidActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+<!--         <activity -->
+<!--             android:name="com.mopub.mobileads.MraidBrowser" -->
+<!--             android:configChanges="keyboardHidden|orientation|screenSize" /> -->
+<!--         <activity -->
+<!--             android:name="com.amazon.device.ads.AdActivity" -->
+<!--             android:configChanges="keyboardHidden|orientation|screenSize" /> -->
+        <activity
+            android:name="com.mopub.common.MoPubBrowser"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <!-- Mopub Ads Declare end-->
+        
+        <!-- Adcolony Ads Declare begin-->
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyOverlay"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyFullscreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyBrowser"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+		<!-- Adcolony Ads Declare end-->
+
+		<!-- admob Ads Declare -->
+		<activity android:name="com.google.android.gms.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+			android:theme="@android:style/Theme.Translucent" />
+		<meta-data
+			android:name="com.google.android.gms.version"
+			android:value="@integer/google_play_services_version" />
+		<!-- admob Ads Declare end-->
+		
+		<!-- 下面两个广告配置目前用于DFP -->
+		<!-- Fyber Ads Declare begin-->
+		<activity
+			android:configChanges="screenSize|orientation"
+			android:name="com.sponsorpay.publisher.mbe.SPBrandEngageActivity"
+			android:hardwareAccelerated="true"/>
+		<!-- Fyber Ads Declare end-->
+
+		<!-- Millennial Media Ads Declare begin -->
+		<activity android:name="com.millennialmedia.android.MMActivity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="keyboardHidden|orientation|keyboard" >
+		</activity>/>
+		<!-- Millennial Media Ads Declare end -->
+		
+<!--*********************************Ads end********************************-->
+
+        <!-- Analytics  -->
+        <receiver android:name="com.common.android.analytics.AnalyticsReceiver"
+            android:exported="false"
+            android:process=":Analytics"
+            >  
+            <intent-filter>  
+                <action android:name="com.common.analytics.receiver"/>  
+            </intent-filter>  
+        </receiver>
+        <!-- Analytics end -->
+
+        <!-- IAP_Amazon -->
+        <receiver android:name="com.amazon.device.iap.ResponseReceiver" >
+            <intent-filter>
+                <action
+                    android:name="com.amazon.inapp.purchasing.NOTIFY"
+                    android:permission="com.amazon.inapp.purchasing.Permission.NOTIFY" />
+            </intent-filter>
+        </receiver>
+         <!-- IAP_Amazon end-->
+
+         <!-- Google Analytics -->
+        <receiver android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+              android:enabled="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+          </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.AnalyticsService"
+             android:enabled="true"
+             android:exported="false"/>
+        <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+                android:exported="true">
+          <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+          </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+      
+        <meta-data
+            android:name="GoogleAnalytics_trackerID"
+            android:value="Your GoogleAnalytics tracker ID" />
+      <!-- Google Analytics end -->
+
+
+        <meta-data
+            android:name="Flurry_Key"
+            android:value="Your flurry key" />
+
+		<!-- 根据自己项目使用的广告类型选择一种ID格式填写，不用的可删除 -->
+
+		<!-- ********MoPub ads ID begin ********-->
+<!--         <meta-data -->
+<!--             android:name="MoPub_phone_banner" -->
+<!--             android:value="手机banner广告ID" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_phone_fullscreen" -->
+<!--             android:value="手机全屏广告ID" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_phone_crosspromo" -->
+<!--             android:value="手机crosspromo广告ID" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_phone_reward" -->
+<!--             android:value="手机rewarded广告ID" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_tablet_banner" -->
+<!--             android:value="平板banner广告ID" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_tablet_fullscreen" -->
+<!--             android:value="平板全屏广告ＩＤ" /> -->
+<!--          <meta-data -->
+<!--             android:name="MoPub_tablet_crosspromo" -->
+<!--             android:value="平板crosspromo广告ＩＤ" /> -->
+<!--         <meta-data -->
+<!--             android:name="MoPub_tablet_reward" -->
+<!--             android:value="平板rewarded广告ID" /> -->
+        <!-- ********MoPub ads ID end******** -->
+        
+        
+        <!-- ********DFP ads ID begin******** -->
+<!--         <meta-data -->
+<!-- 			android:name="Banner" -->
+<!-- 			android:value="your_banner_id_here" /> -->
+
+<!-- 		<meta-data -->
+<!-- 			android:name="Interstitial" -->
+<!-- 			android:value="your_interstitial_id_here" /> -->
+
+<!-- 		<meta-data -->
+<!-- 			android:name="Rect" -->
+<!-- 			android:value="your_rect_id_here" /> -->
+
+<!-- 		<meta-data -->
+<!-- 			android:name="Reward_APPID" -->
+<!-- 			android:value="your_reward_app_id_here" /> -->
+
+<!-- 		<meta-data -->
+<!-- 			android:name="Reward_SecurityToken" -->
+<!-- 			android:value="your_reward_app_security_token_here" /> -->
+		<!-- ********DFP ads ID end******** -->
+
+
+        <!-- Facebook SDK -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="Your facebook APP ID" />
+
+        <meta-data
+            android:name="studioService"
+            android:value="http://services.tobiapps.com" />
+
+        <meta-data
+            android:name="isNeedSupportOrientation"
+            android:value="yes" />
+
+    </application>
+
+    
+</manifest> 

@@ -1,0 +1,2 @@
+include ':Eliminate-Game'
+project(':Eliminate-Game').projectDir = new File(settingsDir, 'app')
